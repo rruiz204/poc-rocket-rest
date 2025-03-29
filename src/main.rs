@@ -1,11 +1,13 @@
-#[macro_use] extern crate rocket;
+use startup::startup;
 
-#[get("/")]
-fn index() -> &'static str {
-    "hello world!"
-}
+pub mod routes;
+pub mod startup;
+pub mod use_cases;
+pub mod controllers;
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+#[rocket::main]
+async fn main() -> Result<(), rocket::Error> {
+    let rocket = startup();
+    rocket.launch().await?;
+    Ok(())
 }
