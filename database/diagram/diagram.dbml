@@ -11,19 +11,19 @@ Table Gender {
   name string [not null]
 }
 
-Table User {
+Table Player {
   id integer [pk]
-  nick string [not null]
-  email string [not null]
   main integer [ref: - Game.id]
+  nick string [not null, unique]
+  email string [not null, unique]
   active boolean [not null, default: true]
 }
 
-Table Player {
-  id integer [pk]
-  user integer [ref: - User.id]
-  elo_counter integer [not null]
-  tournament integer [ref: - Tournament.id]
+Table TournamentPlayer {
+  elo_score integer [not null]
+  player integer [ref: > Player.id, pk]
+  tournament integer [ref: > Tournament.id, pk]
+  registration_date date [not null, default: `now()`]
 }
 
 Table Tournament {
@@ -33,22 +33,32 @@ Table Tournament {
   start_date date [not null]
   game integer [ref: - Game.id]
   player_limit integer [not null]
-  state integer [ref: - State.id]
-  owner integer [ref: - User.id]
+  owner integer [ref: - Player.id]
+  status integer [ref: - TournamentStatus.id]
 }
 
-Table State {
+Table TournamentStatus {
   id integer [pk]
   name string [not null]
 }
 
 Table Match {
   id integer [pk]
-  play_time date [not null]
-  duration string [not null]
-  position integer [not null]
-  elo_result integer [not null]
-  rival integer [ref: > Player.id]
-  player integer [ref: > Player.id]
-  tournament integer [ref: - Tournament.id]
+  match_time date [not null]
+  round_number integer [not null]
+  duration_minutes integer [not null]
+  status integer [ref: - MatchStatus.id]
+  tournament integer [ref: > Tournament.id]
+}
+
+Table MatchPlayer {
+  is_winner boolean [not null]
+  elo_change integer [not null]
+  match integer [ref: - Match.id, pk]
+  player integer [ref: - Player.id, pk]
+}
+
+Table MatchStatus {
+  id integer [pk]
+  name string [not null]
 }
