@@ -1,0 +1,54 @@
+Table Game {
+  id integer [pk]
+  name string [not null]
+  players integer [not null]
+  date_release date [not null]
+  gender integer [ref: - Gender.id, not null]
+}
+
+Table Gender {
+  id integer [pk]
+  name string [not null]
+}
+
+Table User {
+  id integer [pk]
+  nick string [not null]
+  email string [not null]
+  main integer [ref: - Game.id]
+  active boolean [not null, default: true]
+}
+
+Table Player {
+  id integer [pk]
+  user integer [ref: - User.id]
+  elo_counter integer [not null]
+  tournament integer [ref: - Tournament.id]
+}
+
+Table Tournament {
+  id integer [pk]
+  name string [not null]
+  end_date date [not null]
+  start_date date [not null]
+  game integer [ref: - Game.id]
+  player_limit integer [not null]
+  state integer [ref: - State.id]
+  owner integer [ref: - User.id]
+}
+
+Table State {
+  id integer [pk]
+  name string [not null]
+}
+
+Table Match {
+  id integer [pk]
+  play_time date [not null]
+  duration string [not null]
+  position integer [not null]
+  elo_result integer [not null]
+  rival integer [ref: > Player.id]
+  player integer [ref: > Player.id]
+  tournament integer [ref: - Tournament.id]
+}
