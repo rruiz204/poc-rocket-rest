@@ -1,1 +1,1 @@
-### REST API with Rocket & Rust
+### Vandal MVP
