@@ -1,0 +1,15 @@
+-- Your SQL goes here
+
+CREATE TABLE Gender (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE Game (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE,
+  players INTEGER NOT NULL CHECK (players > 0),
+  release_date DATE NOT NULL CHECK (release_date <= CURRENT_DATE),
+  gender_id INTEGER NOT NULL,
+  FOREIGN KEY (gender_id) REFERENCES Gender(id) ON DELETE RESTRICT
+);
