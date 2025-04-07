@@ -2,6 +2,7 @@ use startup::startup;
 
 pub mod routes;
 pub mod schema;
+pub mod models;
 pub mod startup;
 pub mod use_cases;
 pub mod controllers;
