@@ -1,8 +1,8 @@
 use diesel::prelude::{Associations, Identifiable, Queryable};
 use serde::{Deserialize, Serialize};
 
-use crate::models::gender;
-use crate::schema::game;
+use crate::infrastructure::database::core::schema::game;
+use crate::domain::models::gender;
 use chrono::NaiveDate;
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
