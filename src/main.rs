@@ -3,6 +3,7 @@ use startup::startup;
 pub mod startup;
 
 pub mod domain;
+pub mod application;
 pub mod presentation;
 pub mod infrastructure;
 
