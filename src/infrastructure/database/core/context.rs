@@ -1,10 +1,11 @@
 use std::env;
 use dotenvy::dotenv;
 use diesel::pg::PgConnection;
-use diesel::r2d2::{ConnectionManager, Pool};
+use diesel::r2d2::{ConnectionManager, Pool, PooledConnection};
 
-type PgConn = ConnectionManager<PgConnection>;
-type PgPool = Pool<PgConn>;
+pub type PgConn = ConnectionManager<PgConnection>;
+pub type PgPooled = PooledConnection<PgConn>;
+pub type PgPool = Pool<PgConn>;
 
 pub struct Context {
   pub pool: PgPool,
