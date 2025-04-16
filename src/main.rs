@@ -1,4 +1,4 @@
-use startup::startup;
+use startup::Startup;
 
 pub mod startup;
 
@@ -9,7 +9,7 @@ pub mod infrastructure;
 
 #[rocket::main]
 async fn main() -> Result<(), rocket::Error> {
-    let rocket = startup();
+    let rocket = Startup::build();
     rocket.launch().await?;
     Ok(())
 }
