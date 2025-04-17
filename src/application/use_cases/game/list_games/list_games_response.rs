@@ -1,3 +1,6 @@
+use serde::Serialize;
+
+#[derive(Serialize)]
 pub struct ListGamesResponse {
   pub id: i32,
   pub name: String,
