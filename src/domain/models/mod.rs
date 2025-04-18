@@ -1,2 +1,2 @@
 pub mod game;
-pub mod gender;
+pub mod game_gender;
