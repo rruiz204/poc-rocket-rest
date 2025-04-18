@@ -7,7 +7,7 @@ diesel::table! {
         name -> Varchar,
         players -> Int4,
         release_date -> Date,
-        gender_id -> Int4,
+        game_gender_id -> Int4,
     }
 }
 
@@ -19,7 +19,7 @@ diesel::table! {
     }
 }
 
-diesel::joinable!(game -> gamegender (gender_id));
+diesel::joinable!(game -> gamegender (game_gender_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     game,
